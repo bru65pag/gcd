@@ -1,16 +1,19 @@
 fn main() {
     println!("gcd(128,64) = {}",gcd(128,64));
+    println!("gcd(64,128) = {}",gcd(64,128));
 }
 
-fn gcd(a:u64, b:u64) -> u64 {
-    assert!(a!=0 && b!=0 && a>=b) ;
-    let c:u64 = a % b;
-    if c==0 {
-        b
+fn gcd(mut a:u64, mut b:u64) -> u64 {
+    assert!(a!=0 && b!=0);
+    while b!=0 {
+        if b<a {
+            let t=b;
+            b=a;
+            a=t;
+        }
+       b=b%a; 
     }
-    else {
-        gcd(b,c)
-    }
+    a
 }
 
 #[test]
